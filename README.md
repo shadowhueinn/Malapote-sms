@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+UniFAST-TDP Scholarship Management System
+Student Name: Cyd Nathaniel Malapote
+Project: UniFAST-TDP Scholarship Management System
+Framework: Laravel 10
+Date: February 2026
 
-## About Laravel
+Project Feature List
+1. Authentication & User Management
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+User Registration: Register new account, verify email, set user role (Admin, Regional Coordinator, Student)
+User Login: Login with credentials, forgot password, reset password
+User Logout: Logout from system, clear session data
+User Profile Management: View/edit profile, change password, upload profile picture
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2. Student Application Management
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Application Form: Create new application, fill personal/family info, upload ID picture, save draft, submit, view status
+Application Records: Display, search, filter, view, edit, delete, and print applications
+Application Validation: Validate required fields, check income eligibility (≤ ₱400,000), verify citizenship and school registration
 
-## Learning Laravel
+3. Document Management
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Document Upload: Upload COR/COE, Certificate of Indigency, additional documents; view, delete, download
+Document Verification: Review, mark as verified/rejected, request additional documents, add notes
+Document Reports: Generate checklist, export status report, track missing documents
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. Scholarship Evaluation & Processing
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Application Evaluation: View pending applications, evaluate, approve, reject, request info, add comments
+Grantee Management: Display, view, update grantees; track status (New/Continuing), manage year level updates
+Qualification Checking: Verify citizenship, check income limit, validate enrollment, check for other assistance
 
-## Laravel Sponsors
+5. Regional Office Management
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+CHED Regional Office Data: Add, view, edit, delete regional offices; assign coordinators
+Regional Coordinator Functions: Process applications, generate reports, monitor statistics, export data
 
-### Premium Partners
+6. School/Institution Management
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+HEI Records: Add, display, search, edit, delete schools; categorize sector, track accreditation
+Enrolled Students per Institution: View students by institution, generate Annex 5, track units, export list
 
-## Contributing
+7. Family Background Management
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Parent/Guardian Information: Add/edit father & mother info, mark status, record occupation, calculate gross income
+Sibling Information: Add/update sibling count, view family size data
 
-## Code of Conduct
+8. Financial Assistance Tracking
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Other Educational Assistance: Record, view, edit, delete other assistance; check duplicates
+Income Verification: Record household income, validate against ₱400,000 threshold, view reports
 
-## Security Vulnerabilities
+9. Special Categories Management
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Tribal Membership: Record, view, update tribal info; generate reports
+Persons with Disability (PWD): Record disability type, view statistics, update info, generate reports
 
-## License
+10. Reporting & Analytics
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Application Reports: Generate summary, approved, rejected, pending reports; export to PDF/Excel
+Statistical Reports: View totals per region/school, gender/year level/sector distribution
+Financial Reports: Income bracket analysis, budget allocation, disbursement tracking
+Dashboard Analytics: KPIs, application trends graph, real-time statistics, executive summary
+
+11. Notification System
+
+Email Notifications: Send confirmation, status update, document request, approval/rejection, reminder emails
+SMS Notifications: Send SMS confirmations, status updates, deadline reminders
+In-App Notifications: Display alerts, view history, mark as read, delete notifications
+
+12. System Administration
+
+User Account Management: View, add, edit, deactivate, delete users; reset passwords, assign roles
+System Settings: Configure app settings, income thresholds, email templates, academic year, deadlines
+Audit Trail: View logs, track activities, monitor data changes, export reports
+Backup & Recovery: Create, schedule, restore backups; view backup history
+
+13. Search & Filter Functions
+
+Advanced Search: Search by name, school ID, application ID, date range, multi-criteria
+Filter Options: Filter by status, region, school, year level, sector, gender, date submitted
+
+14. Export & Import Functions
+
+Data Export: Export to PDF, Excel, CSV; batch export; export Annex 5
+Data Import: Import student data/school list from Excel, validate and preview import results
+
+15. Communication Module
+
+Messaging System: Send/receive messages to students and coordinators; view inbox, reply, delete
+Announcements: Create, view, edit, delete, publish/unpublish announcements
+
+
+Created by: Cyd Nathaniel Malapote | February 2026
