@@ -7,43 +7,39 @@ use Illuminate\Http\Request;
 
 class ScholarshipProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return response()->json(ScholarshipProgram::all(), 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'         => 'required|string',
+            'grant_amount' => 'required|numeric',
+            'slots'        => 'required|integer',
+            'deadline'     => 'required|date',
+        ]);
+        $program = ScholarshipProgram::create($request->all());
+        return response()->json($program, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ScholarshipProgram $scholarshipProgram)
+    public function show($id)
     {
-        //
+        $program = ScholarshipProgram::findOrFail($id);
+        return response()->json($program, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ScholarshipProgram $scholarshipProgram)
+    public function update(Request $request, $id)
     {
-        //
+        $program = ScholarshipProgram::findOrFail($id);
+        $program->update($request->all());
+        return response()->json($program, 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ScholarshipProgram $scholarshipProgram)
+    public function destroy($id)
     {
-        //
+        ScholarshipProgram::findOrFail($id)->delete();
+        return response()->json(['message' => 'Deleted successfully'], 200);
     }
 }

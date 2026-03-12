@@ -18,7 +18,6 @@ class ApplicationController extends Controller
             'applicant_id'           => 'required|exists:applicants,id',
             'scholarship_program_id' => 'required|exists:scholarship_programs,id',
         ]);
-
         $application = Application::create($request->all());
         return response()->json($application, 201);
     }
@@ -47,7 +46,6 @@ class ApplicationController extends Controller
         $request->validate([
             'status' => 'required|in:pending,approved,rejected',
         ]);
-
         $application = Application::findOrFail($id);
         $application->update(['status' => $request->status]);
         return response()->json($application, 200);

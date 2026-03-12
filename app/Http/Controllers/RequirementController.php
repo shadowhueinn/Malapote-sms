@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace App\Http\Controllers;
 
@@ -19,7 +19,6 @@ class RequirementController extends Controller
             'document_name'          => 'required|string',
             'is_required'            => 'boolean',
         ]);
-
         $requirement = Requirement::create($request->all());
         return response()->json($requirement, 201);
     }
