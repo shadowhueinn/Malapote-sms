@@ -13,12 +13,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Scholarship Programs
 Route::apiResource('scholarship-programs', ScholarshipProgramController::class);
+Route::get('scholarship-programs/open', [ScholarshipProgramController::class, 'openPrograms']);
+Route::patch('scholarship-programs/{id}/status', [ScholarshipProgramController::class, 'changeStatus']);
 
 // Applicants
 Route::apiResource('applicants', ApplicantController::class);
+Route::get('applicants/{id}/applications', [ApplicantController::class, 'applications']);
 
 // Applications
 Route::apiResource('applications', ApplicationController::class);
+Route::get('applications/status/{status}', [ApplicationController::class, 'byStatus']);
+Route::get('applications/applicant/{id}', [ApplicationController::class, 'byApplicant']);
+Route::get('applications/program/{id}', [ApplicationController::class, 'byProgram']);
 
 // Update Application Status
 Route::patch('applications/{id}/status', [ApplicationController::class, 'updateStatus']);

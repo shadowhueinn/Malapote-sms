@@ -31,6 +31,10 @@ class ApplicationController extends Controller
     public function update(Request $request, $id)
     {
         $application = Application::findOrFail($id);
+        $request->validate([
+            'status'  => 'sometimes|in:pending,approved,rejected',
+            'remarks' => 'sometimes|nullable|string',
+        ]);
         $application->update($request->all());
         return response()->json($application, 200);
     }
@@ -39,6 +43,25 @@ class ApplicationController extends Controller
     {
         Application::findOrFail($id)->delete();
         return response()->json(['message' => 'Deleted successfully'], 200);
+    }
+
+    public function byStatus($status)
+    {
+        $status = strtolower($status);
+        if (!in_array($status, ['pending', 'approved', 'rejected'])) {
+            return response()->json(['message' => 'Invalid status'], 422);
+        }
+        return response()->json(Application::with(['applicant', 'scholarshipProgram'])->where('status', $status)->get(), 200);
+    }
+
+    public function byApplicant($applicantId)
+    {
+        return response()->json(Application::with(['scholarshipProgram'])->where('applicant_id', $applicantId)->get(), 200);
+    }
+
+    public function byProgram($scholarshipProgramId)
+    {
+        return response()->json(Application::with(['applicant'])->where('scholarship_program_id', $scholarshipProgramId)->get(), 200);
     }
 
     public function updateStatus(Request $request, $id)

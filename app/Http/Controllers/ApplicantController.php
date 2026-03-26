@@ -38,7 +38,24 @@ class ApplicantController extends Controller
     public function update(Request $request, $id)
     {
         $applicant = Applicant::findOrFail($id);
+        $request->validate([
+            'first_name'     => 'sometimes|required|string',
+            'last_name'      => 'sometimes|required|string',
+            'email'          => 'sometimes|required|email|unique:applicants,email,' . $applicant->id,
+            'contact_number' => 'sometimes|required|string',
+            'address'        => 'sometimes|required|string',
+            'birthdate'      => 'sometimes|required|date',
+            'school'         => 'sometimes|required|string',
+            'course'         => 'sometimes|required|string',
+            'gpa'            => 'sometimes|required|numeric',
+        ]);
         $applicant->update($request->all());
+        return response()->json($applicant, 200);
+    }
+
+    public function applications($id)
+    {
+        $applicant = Applicant::with(['applications.scholarshipProgram'])->findOrFail($id);
         return response()->json($applicant, 200);
     }
 
