@@ -11,6 +11,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+use App\Http\Controllers\AuthController;
+
+Route::post('/login', [AuthController::class, 'apiLogin']);
+Route::post('/register', [AuthController::class, 'apiRegister']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'apiLogout']);
+
 // Scholarship Programs
 Route::apiResource('scholarship-programs', ScholarshipProgramController::class);
 Route::get('scholarship-programs/open', [ScholarshipProgramController::class, 'openPrograms']);

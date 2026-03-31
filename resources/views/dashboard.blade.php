@@ -22,7 +22,16 @@
 </head>
 <body>
     <div class="container">
-        <h1>UniFAST-TDP Scholarship Management System</h1>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <div>
+                <h1>UniFAST-TDP Scholarship Management System</h1>
+                <p>Logged in as: <strong>{{ auth()->user()->name ?? 'N/A' }}</strong> (<em>{{ auth()->user()->role ?? 'guest' }}</em>)</p>
+            </div>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" style="background:#dc2626; border:none; color:white; padding:0.5rem 1rem; border-radius:5px; cursor:pointer;">Logout</button>
+            </form>
+        </div>
 
         <h2>1. Scholarship programs</h2>
         <div class="grid2">
