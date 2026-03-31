@@ -11,6 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // This migration is redundant with a prior `create_documents_table` migration.
+        // Skip creation if the table already exists to allow `migrate:fresh` to run.
+        if (Schema::hasTable('documents')) {
+            return;
+        }
+
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('documents');
+        // No-op: this migration may have been skipped if `documents` already existed.
     }
 };
