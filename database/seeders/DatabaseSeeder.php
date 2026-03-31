@@ -14,15 +14,15 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory()->create([
             'name' => 'Admin User',
-            'email' => 'Admin@gamil.com',
+            'email' => 'Admin@gmail.com',
             'password' => \Illuminate\Support\Facades\Hash::make('Admin123'),
             'role' => 'admin',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'Secretary User',
-            'email' => 'secretary@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('secretary123'),
+            'email' => 'Secretary@gmail.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('Secretary123'),
             'role' => 'secretary',
         ]);
 
@@ -35,3 +35,4 @@ class DatabaseSeeder extends Seeder
         ]);
     }
 }
+

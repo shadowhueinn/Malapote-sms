@@ -26,10 +26,15 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 // role-specific quick endpoints
-Route::get('/admin', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', function () {
+        return view('admin');
+    })->name('admin.dashboard');
+});
 
-Route::get('/secretary', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:secretary'])->name('secretary.dashboard');
+Route::middleware(['auth', 'role:secretary'])->group(function () {
+    Route::get('/secretary', function () {
+        return view('secretary');
+    })->name('secretary.dashboard');
+});
+
