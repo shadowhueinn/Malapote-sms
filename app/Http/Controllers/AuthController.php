@@ -16,32 +16,34 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            $request->session()->regenerate();
-            $user = Auth::user();
+        $user = User::where('email', $request->email)->first();
 
-            // Use the `users.role` column to decide which dashboard to redirect to.
-            $role = strtolower((string) ($user->role ?? 'student'));
-
-            if ($role === 'admin') {
-                return redirect()->intended('/admin');
-            }
-
-            if ($role === 'secretary') {
-                return redirect()->intended('/secretary');
-            }
-
-            return redirect()->intended('/dashboard');
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->withInput($request->only('email', 'remember'));
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->withInput($request->only('email', 'remember'));
+        Auth::login($user, $request->filled('remember'));
+        $request->session()->regenerate();
+
+        // Use the `users.role` column to decide which dashboard to redirect to.
+        $role = strtolower((string) ($user->role ?? 'student'));
+
+        if ($role === 'admin') {
+            return redirect()->intended('/admin');
+        }
+
+        if ($role === 'secretary') {
+            return redirect()->intended('/secretary');
+        }
+
+        return redirect()->intended('/dashboard');
     }
 
     public function register(Request $request)
