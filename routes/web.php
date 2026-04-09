@@ -1,40 +1,34 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SecretaryController;
 
-Route::get('/', [AuthController::class, 'showAuthPage'])->name('login');
-Route::get('/login', [AuthController::class, 'showAuthPage'])->name('login');
+Route::get('/', fn () => redirect()->route('login'));
+Route::get('/login', [AuthController::class, 'showLoginPage'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
-
-// role-specific quick endpoints
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin');
-    })->name('admin.dashboard');
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/applicants', [AdminController::class, 'applicants'])->name('applicants');
+    Route::get('/applicants/{id}', [AdminController::class, 'showApplicant'])->name('applicants.show');
+    Route::post('/approve/{id}', [AdminController::class, 'approve'])->name('approve');
+    Route::post('/reject/{id}', [AdminController::class, 'reject'])->name('reject');
+    Route::get('/secretaries', [AdminController::class, 'secretaries'])->name('secretaries');
+    Route::post('/secretaries', [AdminController::class, 'storeSecretary'])->name('secretaries.store');
+    Route::delete('/secretaries/{id}', [AdminController::class, 'deleteSecretary'])->name('secretaries.delete');
 });
 
-Route::middleware(['auth', 'role:secretary'])->group(function () {
-    Route::get('/secretary', function () {
-        return view('secretary');
-    })->name('secretary.dashboard');
+Route::middleware(['auth', 'role:secretary'])->prefix('secretary')->name('secretary.')->group(function () {
+    Route::get('/dashboard', [SecretaryController::class, 'dashboard'])->name('dashboard');
+    Route::get('/applicants', [SecretaryController::class, 'index'])->name('applicants');
+    Route::get('/applicants/create', [SecretaryController::class, 'create'])->name('applicants.create');
+    Route::post('/applicants', [SecretaryController::class, 'store'])->name('applicants.store');
+    Route::get('/applicants/{id}/edit', [SecretaryController::class, 'edit'])->name('applicants.edit');
+    Route::put('/applicants/{id}', [SecretaryController::class, 'update'])->name('applicants.update');
+    Route::delete('/applicants/{id}', [SecretaryController::class, 'destroy'])->name('applicants.delete');
+    Route::get('/upload/{id}', [SecretaryController::class, 'showUpload'])->name('upload');
+    Route::post('/upload/{id}', [SecretaryController::class, 'upload'])->name('upload.save');
 });
-

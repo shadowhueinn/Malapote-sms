@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function showAuthPage()
+    public function showLoginPage()
     {
         return view('auth.login');
     }
@@ -36,35 +36,14 @@ class AuthController extends Controller
         $role = strtolower((string) ($user->role ?? 'student'));
 
         if ($role === 'admin') {
-            return redirect()->intended('/admin');
+            return redirect()->intended('/admin/dashboard');
         }
 
         if ($role === 'secretary') {
-            return redirect()->intended('/secretary');
+            return redirect()->intended('/secretary/dashboard');
         }
 
-        return redirect()->intended('/dashboard');
-    }
-
-    public function register(Request $request)
-    {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'role' => ['nullable', 'in:admin,secretary,student'],
-        ]);
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'role' => $data['role'] ?? 'student',
-        ]);
-
-        Auth::login($user);
-
-        return redirect('/dashboard');
+        return back()->withErrors(['email' => 'Your role is not allowed to access this system.']);
     }
 
     public function apiLogin(Request $request)
