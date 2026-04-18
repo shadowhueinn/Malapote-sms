@@ -1,95 +1,133 @@
+# UniFAST-TDP Scholarship Management System
 
-UniFAST-TDP Scholarship Management System
-Student Name: Cyd Nathaniel Malapote
-Project: UniFAST-TDP Scholarship Management System
-Framework: Laravel 10
-Date: February 2026
+**Student Name:** Cyd Nathaniel Malapote
 
-Project Feature List
-1. Authentication & User Management
+**Project:** UniFAST-TDP Scholarship Management System
 
-User Registration: Register new account, verify email, set user role (Admin, Regional Coordinator, Student)
-User Login: Login with credentials, forgot password, reset password
-User Logout: Logout from system, clear session data
-User Profile Management: View/edit profile, change password, upload profile picture
+**Framework:** Laravel 10
 
-2. Student Application Management
+**Date:** February 2026
 
-Application Form: Create new application, fill personal/family info, upload ID picture, save draft, submit, view status
-Application Records: Display, search, filter, view, edit, delete, and print applications
-Application Validation: Validate required fields, check income eligibility (≤ ₱400,000), verify citizenship and school registration
+## Project Overview
 
-3. Document Management
+The UniFAST-TDP Scholarship Management System is a Laravel-based application designed to manage scholarship applications, document verification, evaluation, and student assistance workflows for the UniFAST Tertiary Development Program.
 
-Document Upload: Upload COR/COE, Certificate of Indigency, additional documents; view, delete, download
-Document Verification: Review, mark as verified/rejected, request additional documents, add notes
-Document Reports: Generate checklist, export status report, track missing documents
+This system supports multiple user roles including students, secretaries, and administrators, providing tailored access to application creation, review, approval, and reporting.
 
-4. Scholarship Evaluation & Processing
+## Key Features
 
-Application Evaluation: View pending applications, evaluate, approve, reject, request info, add comments
-Grantee Management: Display, view, update grantees; track status (New/Continuing), manage year level updates
-Qualification Checking: Verify citizenship, check income limit, validate enrollment, check for other assistance
+### 1. Authentication & User Management
+- Student, Secretary, and Admin roles
+- User registration, login, logout
+- Profile editing and password management
+- Role-based access control
 
-5. Regional Office Management
+### 2. Student Application Management
+- Create and submit scholarship applications
+- Save drafts and complete Annex 1 information
+- Search, filter, view, edit, and delete applications
+- View application status updates
 
-CHED Regional Office Data: Add, view, edit, delete regional offices; assign coordinators
-Regional Coordinator Functions: Process applications, generate reports, monitor statistics, export data
+### 3. Document Management
+- Upload required scholarship documents
+- Review and verify submitted files
+- Approve or reject documents with notes
+- Download and track document status
 
-6. School/Institution Management
+### 4. Scholarship Evaluation & Processing
+- Process pending applications
+- Approve, reject, or request more information
+- Add evaluator comments and status updates
+- Manage grantee records and renewal status
 
-HEI Records: Add, display, search, edit, delete schools; categorize sector, track accreditation
-Enrolled Students per Institution: View students by institution, generate Annex 5, track units, export list
+### 5. Regional Office Management
+- Manage CHED regional office data
+- Assign regional coordinators
+- Generate regional reports and export data
 
-7. Family Background Management
+### 6. School / Institution Management
+- Maintain HEI records and accreditation details
+- Track enrolled students per institution
+- Generate Annex 5 and institution-level reports
 
-Parent/Guardian Information: Add/edit father & mother info, mark status, record occupation, calculate gross income
-Sibling Information: Add/update sibling count, view family size data
+### 7. Family Background Management
+- Capture parent and guardian information
+- Record household income and family composition
+- Track sibling and dependency data
 
-8. Financial Assistance Tracking
+### 8. Financial Assistance Tracking
+- Manage other educational aid records
+- Validate income eligibility against scholarship thresholds
+- Generate financial verification reports
 
-Other Educational Assistance: Record, view, edit, delete other assistance; check duplicates
-Income Verification: Record household income, validate against ₱400,000 threshold, view reports
+### 9. Special Categories Management
+- Track tribal membership data
+- Record Persons with Disability (PWD) status
+- Generate special category reports
 
-9. Special Categories Management
-
-Tribal Membership: Record, view, update tribal info; generate reports
-Persons with Disability (PWD): Record disability type, view statistics, update info, generate reports
-
-10. Reporting & Analytics
-
-Application Reports: Generate summary, approved, rejected, pending reports; export to PDF/Excel
-Statistical Reports: View totals per region/school, gender/year level/sector distribution
-Financial Reports: Income bracket analysis, budget allocation, disbursement tracking
-Dashboard Analytics: KPIs, application trends graph, real-time statistics, executive summary
-
-11. Notification System
-
-Email Notifications: Send confirmation, status update, document request, approval/rejection, reminder emails
-SMS Notifications: Send SMS confirmations, status updates, deadline reminders
-In-App Notifications: Display alerts, view history, mark as read, delete notifications
-
-12. System Administration
-
-User Account Management: View, add, edit, deactivate, delete users; reset passwords, assign roles
-System Settings: Configure app settings, income thresholds, email templates, academic year, deadlines
-Audit Trail: View logs, track activities, monitor data changes, export reports
-Backup & Recovery: Create, schedule, restore backups; view backup history
-
-13. Search & Filter Functions
-
-Advanced Search: Search by name, school ID, application ID, date range, multi-criteria
-Filter Options: Filter by status, region, school, year level, sector, gender, date submitted
-
-14. Export & Import Functions
-
-Data Export: Export to PDF, Excel, CSV; batch export; export Annex 5
-Data Import: Import student data/school list from Excel, validate and preview import results
-
-15. Communication Module
-
-Messaging System: Send/receive messages to students and coordinators; view inbox, reply, delete
-Announcements: Create, view, edit, delete, publish/unpublish announcements
+### 10. Reporting & Analytics
+- Generate application and approval reports
 
 
-Created by: Cyd Nathaniel Malapote | February 2026
+### 11. Notification System
+- Send email notifications for application events
+- Manage in-app alerts and reminders
+- Support notifications for status changes
+
+### 12. System Administration
+- Manage user accounts and roles
+- Configure system and application settings
+- Maintain audit trails and activity logs
+- Perform backups and recovery tasks
+
+### 13. Search & Filter Functions
+- Advanced search by name, school ID, application ID, dates
+- Filter by status, region, school, year level, and more
+
+### 14. Export & Import Functions
+- Export application and student data
+- Import student or school data from Excel
+- Validate and preview import results
+
+### 15. Communication Module
+- Send messages between users
+- Publish announcements and alerts
+- Manage communication history
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd pogil-sms
+   ```
+2. Install dependencies:
+   ```bash
+   composer install
+   npm install
+   ```
+3. Copy environment file:
+   ```bash
+   cp .env.example .env
+   ```
+4. Configure database settings in `.env`.
+5. Generate application key:
+   ```bash
+   php artisan key:generate
+   ```
+6. Run migrations:
+   ```bash
+   php artisan migrate
+   ```
+
+## API and Usage
+
+The system is built as a headless Laravel API with Sanctum authentication. Use the provided API routes for authentication, application management, role-based operations, and admin user control.
+
+## Contact
+
+Created by: **Cyd Nathaniel Malapote**
+
+---
+
+*UniFAST-TDP Scholarship Management System* is intended for academic and administrative management of scholarship applications and related student assistance workflows.
