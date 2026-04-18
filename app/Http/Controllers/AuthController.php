@@ -66,23 +66,39 @@ class AuthController extends Controller
 
     public function apiRegister(Request $request)
     {
-        $data = $request->validate([
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'role' => ['nullable', 'in:admin,secretary,student'],
-        ]);
+            'role' => ['sometimes', 'in:student,secretary,admin'],
+        ];
+
+        $data = $request->validate($rules);
+        $role = $data['role'] ?? 'student';
+         
+        /*
+        if ($role !== 'student') {
+            if (!$request->user() || $request->user()->role !== 'admin') {
+                return response()->json(['message' => 'Only admins can register secretary or admin roles.'], 403);
+            }
+        }
+            */
 
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role' => $data['role'] ?? 'student',
+            'role' => $role,
         ]);
 
         $token = $user->createToken('api-token')->plainTextToken;
 
-        return response()->json(['user' => $user, 'token' => $token]);
+        return response()->json(['user' => $user, 'token' => $token], 201);
+    }
+
+    public function me(Request $request)
+    {
+        return response()->json($request->user(), 200);
     }
 
     public function apiLogout(Request $request)

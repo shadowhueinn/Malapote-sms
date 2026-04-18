@@ -18,14 +18,14 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, string $role)
     {
         if (!Auth::check()) {
-            return redirect()->route('login');
+            return response()->json(['message' => 'Unauthenticated.'], 401);
         }
 
         $userRole = strtolower((string) (Auth::user()->role ?? 'student'));
-        $expectedRole = strtolower($role);
+        $allowedRoles = array_map('trim', explode(',', strtolower($role)));
 
-        if ($userRole !== $expectedRole) {
-            abort(403);
+        if (!in_array($userRole, $allowedRoles, true)) {
+            return response()->json(['message' => 'Forbidden. Insufficient role permissions.'], 403);
         }
 
         return $next($request);
